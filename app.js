@@ -88,6 +88,10 @@ app.use((req,res,next)=>{
    next();
 });
 
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
+
 app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",usersRouter);
@@ -105,7 +109,8 @@ app.use((err, req, res, next) => {
 //   res.status(statusCode).send(message);
 });
 
-app.listen(8080,()=>{
-    console.log("server is listning to port 8080");
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
 });
 
